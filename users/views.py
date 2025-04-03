@@ -4,9 +4,10 @@ import uuid
 from django.core.cache import cache
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.decorators import permission_classes
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -80,7 +81,6 @@ def login_view(request):
 
     return render(request, 'login/login.html')
 
-
 def register_view(request):
     if request.method == "POST":
         username = request.POST['username']
@@ -108,3 +108,54 @@ def register_view(request):
 def logout_view(request):
     logout(request)
     return redirect('home')
+
+@login_required
+def profile_view(request):
+    user = request.user
+    condition = None
+    message = None
+    
+
+    if request.method == "POST":
+        #Account Information
+        first_name = request.POST.get('first_name', '').strip()
+        last_name = request.POST.get('last_name', '').strip()
+
+
+        #Change password
+        password = request.POST.get('password')
+        new_password = request.POST.get('new_password')
+        
+        if password is not None:
+            if user.check_password(password):
+                if new_password:
+                    user.set_password(new_password)
+                    message = 'Password updated successfully!'
+                    condition = "success"
+                else:
+                    message = "New password cannot be empty."
+                    condition = "warning"
+            
+            else:
+                condition = 'danger'
+                message = 'password is incorrect'
+
+        user.first_name = first_name
+        user.last_name = last_name
+        user.save()
+
+        # return redirect('profile')
+
+
+    username = user.username
+    phone_number = user.phone_number
+    first_name = user.first_name
+    last_name = user.last_name
+    email = user.email
+    
+    return render(request, "my-account.html", {'username_placeholder': username, 'phone_number_placeholder': phone_number,
+                                                'firstname_placeholder': first_name, 'lastname_placeholder': last_name,
+                                                'email_placeholder': email, 'status': condition , 'message': message,
+                                                'alert_message': condition is not None,
+                                                })
+

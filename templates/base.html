@@ -6,11 +6,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="{% static "assets/img/icon-img/django_icon.png" %}">
 
     <!--CUSTOM CSS-->
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="{% static "assets/css/bootstrap.min.css" %}">
+    {% comment %} <!-- Bootstrap 3.4 CSS -->
+    <link rel="stylesheet" href="{% static "assets/css/bootstrap3.min.css" %}"> {% endcomment %}
+    <!-- Bootstrap 5.3.3 CSS -->
+    <link rel="stylesheet" href="{% static "assets/css/bootstrap-5/css/bootstrap.min.css" %}">
     <!-- Icon Font CSS -->
     <link rel="stylesheet" href="{% static "assets/css/icons.min.css" %}">
     <!-- Plugins CSS -->
@@ -44,10 +47,9 @@
     {% comment %} {% include 'snippets/base_js.html' %} {% endcomment %}
     {% comment %} <div class="container wrapper" style="padding-top: 70px; padding-bottom: 20px;"> {% endcomment %}
 
-    {% block content %}
+    {% block content %}{% endblock %}
 
-    {% endblock %}
-
+    {% include 'snippets/footer.html' %}
 </body>
 
 

@@ -54,8 +54,8 @@
                           <div class="account-dropdown">
                               <ul>
                                 {% if user.is_authenticated %}
-                                <li><a href="my-account.html">my account</a></li>
-                                <li><a href="wishlist.html">Wishlist</a></li>
+                                <li><a href="{%url "profile"%}">my profile</a></li>
+                                {% comment %} <li><a href="wishlist.html">Wishlist</a></li> {% endcomment %}
                                 <li><a href="{%url "logout"%}">Logout</a></li>
                                 {% else %}
                                 <li><a href="{%url "login"%}">Login</a></li>

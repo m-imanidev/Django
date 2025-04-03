@@ -24,7 +24,7 @@ class Book(models.Model):
     # title_page = models.CharField(max_length=255)
     # category = models.ForeignKey(Category, on_delete=models.PROTECT, related_name="books", null=True)
     # url_base = ''
-    # image = ''
+    image = models.ImageField(upload_to= 'books/', null=True)
     publisher = models.ForeignKey(Publisher, on_delete=models.PROTECT, related_name="books", blank=False, null= False)
     author = models.ForeignKey(Author, on_delete=models.PROTECT, related_name="books", null=False, blank=False)
     inventory = models.IntegerField(default=0)
