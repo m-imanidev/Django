@@ -13642,8 +13642,8 @@ a.default-btn {
 }
 .product-details-img .large-img-style span {
   position: absolute;
-  top: 30px;
-  left: 30px;
+  top: 10px;
+  left: 10px;
   font-size: 13px;
   color: #fff;
   display: inline-block;
@@ -13655,8 +13655,8 @@ a.default-btn {
 }
 .product-details-img .large-img-style .img-popup-wrap {
   position: absolute;
-  right: 30px;
-  top: 30px;
+  right: 10px;
+  top: 10px;
   font-size: 30px;
   color: #000000;
 }
@@ -14145,6 +14145,23 @@ a.default-btn {
   .cart-main-area.pb-100 {
     padding-bottom: 60px;
   }
+}
+
+button.add-to-cart {
+  all: unset;
+  display: inline-block;
+  color: #fff;
+  background-color: #007bff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button.add-to-cart:hover {
+  background-color: #0056b3;
 }
 
 h3.cart-page-title {
@@ -15832,4 +15849,26 @@ h3.cart-page-title {
   position: fixed;
   z-index: 999999;
   pointer-events: none;
+}
+
+.alert_message {
+  position: fixed;
+  top: 30px;
+  right: 50px;
+  z-index: 1000;
+}
+
+.btn-link {
+  background: none;
+  border: none;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: inherit;
+  display: inline;
+  padding: 0;
+}
+
+.btn-link:hover {
+  color: #a749ff;
 }

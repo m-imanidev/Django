@@ -162,3 +162,5 @@ CACHES = {
         'LOCATION': 'unique.snowflake',
     }
 }
+
+CART_SESSION_ID = "cart"

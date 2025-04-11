@@ -13,7 +13,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 
-from .models import User, Device, UserManager
+from .models import User, Device
+from utils.validators import validate_phone_number
 
 @permission_classes([AllowAny])
 class RegisterView(APIView):
@@ -159,3 +160,36 @@ def profile_view(request):
                                                 'alert_message': condition is not None,
                                                 })
 
+def login_phone_number(request):
+    if request.user.is_authenticated:
+        return redirect('home')
+    
+    if request.method == 'POST':
+        password = request.POST.get('password')
+        phone_number = request.POST.get('phonenumber')
+        if phone_number is not None:
+            try:
+                print(phone_number)
+                validate_phone_number(phone_number)
+            except:
+                messages.error(request, 'Invalid input')
+                return render(request, 'login/login-phone-number.html')
+
+        try:
+            user = User.objects.get_by_phone_number(phone_number)
+            print(user)
+            if password is not None:
+                is_user = authenticate(request, username = user.username, password = password)
+                if is_user is not None:
+                    login(request, is_user)
+                    return redirect('home')
+                else:
+                    messages.error(request, 'password is incorrect')
+                    return render(request, 'login/login-password.html')
+            return render(request, 'login/login-password.html')
+        #register
+        except User.DoesNotExist:
+            messages.success(request, 'Mobile number not used')
+            return render(request, 'login/login-phone-number.html')
+
+    return render(request, 'login/login-phone-number.html')

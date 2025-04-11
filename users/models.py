@@ -69,7 +69,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(_('email address'), null=True, blank=True, unique=True)
     phone_number = models.BigIntegerField(_('phone number'), unique= True, null=True, blank=True,
                                           validators=[
-                                          validators.RegexValidator(r'^989[0-3,9]\d{8}$',('Enter a valid phone number'))],
+                                          validators.RegexValidator(r'^09\d{9}$',('Enter a valid phone number'))],
                                           error_messages={
                                                 "unique": _("A user with this phone number already exists."),
                                                 }

@@ -44,8 +44,4 @@ def home_page(request):
 def book_detail(request, id):
     book = Book.objects.get(pk = id)
     
-
-    return render(request, 'books/product-details.html', {'book_name': book.name, 'book_price': book.price,
-                                                          'book_discount': book.discount, 'book_image': book.image.url,
-
-                                                          })
+    return render(request, 'books/product-details.html', {'book': book})

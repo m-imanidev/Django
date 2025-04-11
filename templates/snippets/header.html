@@ -74,19 +74,20 @@
                           </button>
                           <div class="shopping-cart-content">
                               <ul>
+                                {%for item in cart%}
                                   <li class="single-shopping-cart">
                                       <div class="shopping-cart-img">
                                           <a href="#"><img alt="" src="{% static "assets/img/cart/cart-1.png" %}"></a>
                                       </div>
                                       <div class="shopping-cart-title">
-                                          <h4><a href="#">T- Shart & Jeans </a></h4>
-                                          <h6>Qty: 02</h6>
+                                          <h4><a href="#">{{item.book.name}} </a></h4>
                                           <span>$260.00</span>
                                       </div>
                                       <div class="shopping-cart-delete">
                                           <a href="#"><i class="fa fa-times-circle"></i></a>
                                       </div>
                                   </li>
+                                {%endfor%}
                                   <li class="single-shopping-cart">
                                       <div class="shopping-cart-img">
                                           <a href="#"><img alt="" src="{% static "assets/img/cart/cart-2.png" %}"></a>
@@ -106,7 +107,7 @@
                                   <h4>Total : <span class="shop-total">$260.00</span></h4>
                               </div>
                               <div class="shopping-cart-btn btn-hover text-center">
-                                  <a class="default-btn" href="cart-page.html">view cart</a>
+                                  <a class="default-btn" href="{%url 'cart' %}">view cart</a>
                                   <a class="default-btn" href="checkout.html">checkout</a>
                               </div>
                           </div>
@@ -130,7 +131,7 @@
                   <div class="main-menu">
                       <nav>
                           <ul>
-                              <li><a href="index.html">Home </a>
+                              <li><a href="{%url 'home'%}">Home </a>
                               </li>
                               <li><a href="shop.html"> Shop <i class="fa fa-angle-down"></i> </a>
                                   <ul class="mega-menu">
